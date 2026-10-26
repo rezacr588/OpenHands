@@ -102,6 +102,7 @@ docker run -it --rm \
 **Windows (PowerShell / Windows Terminal):** See [README.windows.md](./README.windows.md) for the equivalent commands.
 
 The agent will be able to access any project under `PROJECTS_PATH`.
+Default conversation workspace files are saved under your mounted `.openhands/workspace` directory.
 
 ### Option 3: With Multiple Docker Sandboxes
 

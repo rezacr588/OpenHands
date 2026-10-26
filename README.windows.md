@@ -28,6 +28,7 @@ docker run -it --rm `
 Open [http://localhost:8000/canvas](http://localhost:8000/canvas) in your browser.
 
 The agent will be able to access any project under `PROJECTS_PATH`.
+Default conversation workspace files are saved under your mounted `.openhands/workspace` directory.
 
 The quickstart restricts the published port to host loopback before explicitly enabling session-key injection. If you publish the port on a LAN or public interface, omit `AGENT_CANVAS_ALLOW_LAN_SESSION_KEY`, set `LOCAL_BACKEND_API_KEY` to a strong value, and enter that value in the UI.
 

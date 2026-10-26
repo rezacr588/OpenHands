@@ -193,7 +193,8 @@ RUN mkdir -p /home/openhands/.openhands/agent-canvas/conversations \
 USER openhands
 
 # Persistence volumes:
-#   /home/openhands/.openhands — settings, secrets, conversations, automation DB
+#   /home/openhands/.openhands — settings, secrets, conversations, automation DB,
+#                              and default workspaces (linked from ~/workspace)
 #   /projects                  — user code the agent can read/edit
 # Bind-mount these for data to survive container restarts:
 #   docker run -v ~/.openhands:/home/openhands/.openhands -v ~/projects:/projects ...

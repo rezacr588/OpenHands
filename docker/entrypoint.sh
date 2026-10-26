@@ -184,6 +184,21 @@ VSCODE_ROUTE="${VSCODE_BASE_PATH}=http://127.0.0.1:${VSCODE_PORT}"
 OPENHANDS_DIR="${HOME}/.openhands"
 STATE_DIR="${OPENHANDS_DIR}/${CONFIG_STATE_SUBDIR:-agent-canvas}"
 export OH_PERSISTENCE_DIR="${OH_PERSISTENCE_DIR:-${OPENHANDS_DIR}}"
+
+# Canvas defaults to ~/workspace/project/<conversation>, outside the state
+# volume. Keep that path while storing new default workspaces in the volume.
+# An existing directory, bind mount, or user-provided symlink takes precedence.
+if [ ! -e "${HOME}/workspace" ] && [ ! -L "${HOME}/workspace" ]; then
+  mkdir -p "${OPENHANDS_DIR}/workspace" || {
+    log_error "Cannot create persisted default workspace in ${OPENHANDS_DIR}/workspace"
+    exit 1
+  }
+  ln -s "${OPENHANDS_DIR}/workspace" "${HOME}/workspace" || {
+    log_error "Cannot link default workspace to persisted storage"
+    exit 1
+  }
+fi
+
 # >>> docker-browser-tools
 if [ "${VITE_ENABLE_BROWSER_TOOLS:-}" = "false" ]; then
   export OH_ENABLE_BROWSER="${OH_ENABLE_BROWSER:-false}"
